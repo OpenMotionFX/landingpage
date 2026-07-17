@@ -1,5 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" fill="#181414"/>
-  <path d="M10 22 V10 H22 M42 10 H54 V22 M54 42 V54 H42 M22 54 H10 V42" fill="none" stroke="#f75c03" stroke-width="6" stroke-linecap="square"/>
-  <circle cx="32" cy="32" r="7" fill="#f75c03"/>
+<svg viewBox="0 0 100 100" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="100" rx="12" fill="#1b1918" />
+  
+  <!-- Background subtle track -->
+  <circle cx="50" cy="50" r="26" fill="none" stroke="#59514e" stroke-width="6" />
+  
+  <!-- Primary sweeping motion -->
+  <path d="M 24,50 A 26,26 0 0,1 50,24" fill="none" stroke="#e5dfdd" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- The Gaffer Orange focal point (the data/carriage) -->
+  <circle cx="71" cy="29" r="10" fill="#f75c03" />
 </svg>
