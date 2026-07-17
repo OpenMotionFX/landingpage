@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works — OpenMotionFX</title>
+  <meta name="description" content="Discover the technical pipeline of OpenMotionFX. Learn how distributed ESP32 nodes and local-first memory create sub-millisecond synchronized camera moves.">
+  <link rel="canonical" href="https://www.openmotionfx.com/how-it-works.html">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="brand" href="index.html" aria-label="OpenMotionFX home">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path class="brand-mark" d="M10 22 V10 H22 M42 10 H54 V22 M54 42 V54 H42 M22 54 H10 V42" fill="none" stroke-width="7" stroke-linecap="square"/>
+          <circle cx="32" cy="32" r="8" fill="currentColor"/>
+        </svg>
+        OpenMotionFX
+      </a>
+      <nav aria-label="Main">
+        <ul class="nav-links">
+          <li><a href="system.html">The System</a></li>
+          <li><a href="how-it-works.html" aria-current="page">How It Works</a></li>
+          <li><a href="roadmap.html">Roadmap</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+          <li>
+            <a class="nav-gh" href="https://github.com/OpenMotionFX/OpenMotionFX" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+              GitHub
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="hero">
+      <div class="container split">
+        <div>
+          <span class="tape">Core Architecture</span>
+          <h1>Math on the Laptop. <em>Execution on the Node.</em></h1>
+          <p class="lead" style="margin-top:1.5rem">
+            Commercial systems force hardware to do real-time math over Bluetooth, which causes drift and lag. 
+            OpenMotionFX separates the thinking from the doing. We compile the exact motor steps on your computer first, then send them to the hardware to simply execute.
+          </p>
+        </div>
+        <div>
+          <div class="flow" role="img" aria-label="Pipeline diagram showing math compilation to hardware execution">
+            <span class="node">Conductor App (Keyframes)</span>
+            <span class="arrow">&#8595;</span>
+            <span class="node">Bezier Math &amp; Step Compilation</span>
+            <span class="arrow">&#8595;</span>
+            <span class="node node--hot">Wi-Fi Payload (.JSON)</span>
+            <span class="arrow">&#8595;</span>
+            <span class="node">ESP32 Flash Memory</span>
+            <span class="arrow">&#8595;</span>
+            <span class="node">Microsecond GO Beacon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="tape">The Sync Protocol</span>
+          <h2>Wi-Fi carries plans, never motion.</h2>
+          <p style="margin-top:1rem; max-width: 70ch;">
+            Wi-Fi is inherently unstable. If your router stutters while streaming live telemetry, your camera crashes into the talent. To fix this, OpenMotionFX uses a <strong>Local-First Broadcast Architecture</strong>.
+          </p>
+        </div>
+        
+        <div class="go-steps reveal">
+          <div class="go-step">
+            <h3>1. The Handshake</h3>
+            <p>You design a move in the Conductor app. The app slices that move into thousands of precise motor steps and sends a JSON payload over Wi-Fi to every node (Pan, Tilt, Slider, Lights).</p>
+          </div>
+          <div class="go-step">
+            <h3>2. Local Storage</h3>
+            <p>Every node receives its specific payload and stores it in its local flash memory. The nodes then report back to the Conductor app: <em>"Payload received and verified. Standing by."</em></p>
+          </div>
+          <div class="go-step">
+            <h3>3. Arming & Homing</h3>
+            <p>When you click "Arm," the modules travel to their start positions, calibrate against their hard-stops, and lock their motors. They are now completely independent of network traffic.</p>
+          </div>
+          <div class="go-step">
+            <h3>4. The GO Beacon</h3>
+            <p>The Conductor broadcasts a tiny, single UDP packet: <strong>"GO."</strong> Because the moves are already loaded in memory, every node starts ticking its own internal hardware timer simultaneously. Even if the router dies mid-take, the move finishes perfectly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--deep" id="vfx-pipeline">
+      <div class="container split">
+        <div class="reveal">
+          <span class="tape">VFX Pipeline</span>
+          <h2>The `.omfx` Move File</h2>
+          <p style="margin-top:1.25rem">
+            OpenMotionFX doesn't just execute moves; it records them. Every take generates a standardized package containing the exact spatial transforms of the camera, lens data, and active lighting cues.
+          </p>
+          <p style="margin-top:1.25rem">
+            This bridges the physical and virtual sets. No more guessing sensor sizes or focal lengths in post-production. You drag the `.omfx` file directly into Blender or Unreal Engine, and a virtual camera is generated that identically mimics the physical rig.
+          </p>
+        </div>
+        
+        <div class="reveal">
+          <div class="term" role="img" aria-label="Terminal readout of an omfx archive structure">
+            <pre><span class="p">omfx-cli extract --take 03</span>
+
+<span class="muted">Extracting shot_042_take_03.omfx...</span>
+
+  &#9500;&#9472;&#9472; manifest.json       <span class="muted">(Timecode, Frame Rate, Sync)</span>
+  &#9500;&#9472;&#9472; /planned
+  &#9474;   &#9492;&#9472;&#9472; trajectory.csv  <span class="muted">(The bezier curves you drew)</span>
+  &#9500;&#9472;&#9472; /performed
+  &#9474;   &#9492;&#9472;&#9472; encoder_log.csv <span class="muted">(What the motors actually did)</span>
+  &#9500;&#9472;&#9472; camera_meta.json    <span class="muted">(Focal length, exposure limits)</span>
+  &#9492;&#9472;&#9472; export_blender.py   <span class="muted">(Auto-generation script for 3D)</span>
+
+<span class="muted">[OK] 100% extracted to /vfx_assets/</span></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path class="brand-mark" d="M10 22 V10 H22 M42 10 H54 V22 M54 42 V54 H42 M22 54 H10 V42" fill="none" stroke-width="7" stroke-linecap="square"/>
+              <circle cx="32" cy="32" r="8" fill="currentColor"/>
+            </svg>
+            OpenMotionFX
+          </a>
+          <p>Open-source, cinema-grade, modular motion control for smartphone filmmaking and VFX. Local-first, protocol-first, VFX-first.</p>
+        </div>
+        <div>
+          <h4>Site</h4>
+          <ul>
+            <li><a href="system.html">The System</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Code</h4>
+          <ul>
+            <li><a href="https://github.com/OpenMotionFX/OpenMotionFX" target="_blank" rel="noopener">OpenMotionFX</a></li>
+            <li><a href="https://github.com/OpenMotionFX/OpenCamera" target="_blank" rel="noopener">OpenCamera</a></li>
+            <li><a href="https://github.com/OpenMotionFX" target="_blank" rel="noopener">GitHub Organization</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Promise</h4>
+          <ul>
+            <li>No cloud</li>
+            <li>No accounts</li>
+            <li>No subscriptions</li>
+            <li>Ever</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <span>&copy; 2026 OpenMotionFX contributors</span>
+        <span>License intent: GPLv3 (code) &middot; CERN-OHL-S (hardware) &middot; CC-BY-SA (docs) &middot; CC0 (protocol)</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
