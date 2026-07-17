@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenMotionFX — Open-Source Motion Control for Filmmaking</title>
+  <meta name="description" content="Open-source, cinema-grade, modular motion control for smartphone filmmaking and VFX. Repeatable camera moves — pan/tilt head, slider, dolly, lights — for under ~$400 in parts.">
+  <link rel="canonical" href="https://www.openmotionfx.com/">
+  <meta property="og:title" content="OpenMotionFX — The same move. Every take.">
+  <meta property="og:description" content="Open-source, cinema-grade, modular motion control for smartphone filmmaking and VFX. Under ~$400 in parts.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.openmotionfx.com/">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "OpenMotionFX",
+    "description": "Open-source, cinema-grade, modular motion control for smartphone filmmaking and VFX.",
+    "codeRepository": "https://github.com/OpenMotionFX/OpenMotionFX",
+    "url": "https://www.openmotionfx.com/"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="brand" href="index.html" aria-label="OpenMotionFX home">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path class="brand-mark" d="M10 22 V10 H22 M42 10 H54 V22 M54 42 V54 H42 M22 54 H10 V42" fill="none" stroke-width="7" stroke-linecap="square"/>
+          <circle cx="32" cy="32" r="8" fill="currentColor"/>
+        </svg>
+        OpenMotionFX
+      </a>
+      <nav aria-label="Main">
+        <ul class="nav-links">
+          <li><a href="system.html">The System</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="roadmap.html">Roadmap</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+          <li>
+            <a class="nav-gh" href="https://github.com/OpenMotionFX/OpenMotionFX" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+              GitHub
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="container">
+        <div>
+          <p class="hero-status"><span class="dot" aria-hidden="true"></span> Status: planning &amp; bench prototyping — follow the build</p>
+          <h1>The same move. <em>Every take.</em></h1>
+          <p class="lead">
+            OpenMotionFX is an open-source, modular motion control system for smartphone
+            filmmaking and VFX. Motorized camera moves you can replay exactly — the trick
+            behind clean plates, crowd duplication and impossible transitions — for
+            <strong>under&nbsp;~$400 in parts</strong> instead of $68,000.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn--accent" href="system.html">Explore the system</a>
+            <a class="btn" href="https://github.com/OpenMotionFX/OpenMotionFX" target="_blank" rel="noopener">Read the docs on GitHub</a>
+          </div>
+        </div>
+
+        <figure class="viewfinder vf-corners" aria-label="Animated demo: the same camera move performed twice, landing on an identical path">
+          <div class="vf-head">
+            <span data-take-label>TAKE 01</span>
+            <span class="rec">&#9679; REC</span>
+          </div>
+          <svg class="vf-canvas" viewBox="0 0 460 200" role="img" aria-label="A camera motion path drawn between three keyframes; each take traces the identical curve">
+            <!-- ghost of the planned move -->
+            <path class="mp-ghost" d="M28 148 C 90 40, 200 30, 268 84 S 380 178, 432 96"/>
+            <!-- the performed move -->
+            <path class="mp-path" d="M28 148 C 90 40, 200 30, 268 84 S 380 178, 432 96"/>
+            <!-- keyframes -->
+            <circle class="mp-key" cx="28" cy="148" r="5"/>
+            <circle class="mp-key" cx="268" cy="84" r="5"/>
+            <circle class="mp-key" cx="432" cy="96" r="5"/>
+            <text class="mp-label" x="20" y="170">KF 1</text>
+            <text class="mp-label" x="258" y="66">KF 2</text>
+            <text class="mp-label" x="420" y="120">KF 3</text>
+            <!-- travelling camera dot -->
+            <circle class="mp-dot" cx="28" cy="148" r="6"/>
+          </svg>
+          <figcaption class="vf-foot">
+            <span class="timecode">TC 00:00:00:00</span>
+            <button class="vf-replay" type="button">&#8635; Run it again</button>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= WHY REPEATABLE ================= -->
+    <section class="section">
+      <div class="container split">
+        <div>
+          <span class="tape">Why repeatability</span>
+          <h2>One trick unlocks a whole visual language</h2>
+          <p class="lead" style="margin-top:1.25rem">
+            Repeatable camera motion — the ability to run the exact same move twice —
+            is the foundation of multi-pass VFX.
+          </p>
+          <p style="margin-top:1.25rem">
+            Shoot a pass with your actor, run the identical move on the empty set, and the
+            two takes composite perfectly: your actor can now vanish mid-shot, play their own
+            twin, or walk through a crowd made of six people filmed six times. Because the
+            camera path is data, not muscle memory, every pass lines up sub-pixel.
+          </p>
+          <p style="margin-top:1rem">
+            Until now that ability started at professional robot arms. Consumer sliders can't
+            repeat a move; prosumer gear locks repeatability behind apps and subscriptions.
+          </p>
+        </div>
+        <div>
+          <div class="term" role="img" aria-label="Examples of multi-pass VFX techniques">
+            <pre><span class="p">multi-pass playbook</span>
+
+  clean plates        remove rigs &amp; crew
+  crowd duplication   6 people &#8594; 60
+  twinning            one actor, two roles
+  scale tricks        giants &amp; miniatures
+  seamless wipes      impossible transitions
+  day-for-night       two lighting passes
+  product spins       identical every time</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRICE GAP ================= -->
+    <section class="section section--well">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="tape">The gap</span>
+          <h2>Between $200 and $68,000 there is nothing</h2>
+          <p class="muted" style="margin-top:1rem">Where repeatable, multi-axis motion control actually starts today.</p>
+        </div>
+        <div class="gap-table reveal">
+          <div class="gap-row">
+            <span class="gap-tier">Consumer</span>
+            <span class="gap-what">Cheap sliders, DJI Osmo Mobile</span>
+            <span class="gap-price">$50–200</span>
+            <span class="gap-rep">not repeatable</span>
+          </div>
+          <div class="gap-row">
+            <span class="gap-tier">Prosumer</span>
+            <span class="gap-what">Edelkrone, Kessler — app-gated features, subscriptions</span>
+            <span class="gap-price">$1,000–3,500+</span>
+            <span class="gap-rep">partially</span>
+          </div>
+          <div class="gap-row">
+            <span class="gap-tier">Professional</span>
+            <span class="gap-what">Mark Roberts Bolt robot arms</span>
+            <span class="gap-price">$68,000+</span>
+            <span class="gap-rep">yes</span>
+          </div>
+          <div class="gap-row gap-row--us">
+            <span class="gap-tier">OpenMotionFX</span>
+            <span class="gap-what">Full multi-axis suite from 3D-printer-ecosystem parts, fully open</span>
+            <span class="gap-price">~$400</span>
+            <span class="gap-rep">yes — encoder-verified</span>
+          </div>
+        </div>
+        <p class="muted reveal" style="margin-top:2rem; font-size:0.9rem">
+          Nothing in between — and nothing at all built smartphone-first. That's the gap this project exists to close.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS (mini) ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="tape">How it works</span>
+          <h2>Wi-Fi jitter can't ruin a take</h2>
+          <p style="margin-top:1rem">
+            Moves are compiled on your laptop and <strong>pre-loaded</strong> into every module.
+            A single broadcast <strong>GO</strong> signal — synchronized to within a tenth of a
+            millisecond — starts them all. The network never carries real-time motion, so each
+            module executes its move on precise local timing, every single time.
+          </p>
+        </div>
+        <div class="go-steps reveal">
+          <div class="go-step">
+            <h3>Compile</h3>
+            <p>The Conductor app on your laptop turns your keyframes into exact per-motor trajectories — all the heavy math happens up front, not mid-move.</p>
+          </div>
+          <div class="go-step">
+            <h3>Upload</h3>
+            <p>Each module receives only its own portion of the move and confirms it loaded correctly. No silent failures.</p>
+          </div>
+          <div class="go-step">
+            <h3>Arm</h3>
+            <p>Modules home themselves, travel to their start marks, and report ready — a checklist, just like a real set.</p>
+          </div>
+          <div class="go-step">
+            <h3>Go</h3>
+            <p>One broadcast beacon starts every module against a shared clock. Motors, lights and camera triggers execute in lockstep, and encoders record what actually happened.</p>
+          </div>
+        </div>
+        <p class="reveal" style="margin-top:2rem"><a href="how-it-works.html">The full pipeline, explained simply &#8594;</a></p>
+      </div>
+    </section>
+
+    <!-- ================= MODULES ================= -->
+    <section class="section section--deep">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="tape">The system</span>
+          <h2>Eight modules. One wireless language. None mandatory.</h2>
+          <p style="margin-top:1rem">
+            Every module runs the same brain (a ~$6 ESP32-S3) and speaks the same open protocol,
+            so they stack into one synchronized rig. A lone pan/tilt head is a complete product —
+            everything else is additive.
+          </p>
+        </div>
+        <div class="module-list reveal">
+          <a class="module-row" href="system.html#pan-tilt">
+            <span class="module-name">Pan/Tilt Head</span>
+            <span class="module-desc">The flagship. Brushless motors, zero-backlash printed gears, repeatable to 0.02&deg;.</span>
+            <span class="module-cost">$75–95</span>
+          </a>
+          <a class="module-row" href="system.html#slider">
+            <span class="module-name">Slider</span>
+            <span class="module-desc">500&nbsp;mm linear rail, belt-driven, repeatable to 0.05&nbsp;mm.</span>
+            <span class="module-cost">$90–110</span>
+          </a>
+          <a class="module-row" href="system.html#dolly">
+            <span class="module-name">Dolly</span>
+            <span class="module-desc">Floor track with positive drive — repeats within 0.5&nbsp;mm over 3&nbsp;m of track.</span>
+            <span class="module-cost">$80–110</span>
+          </a>
+          <a class="module-row" href="system.html#turntable">
+            <span class="module-name">Turntable</span>
+            <span class="module-desc">Product and prop spins, identical every time. The cheapest way in.</span>
+            <span class="module-cost">$40–55</span>
+          </a>
+          <a class="module-row" href="system.html#focus">
+            <span class="module-name">Focus/Zoom Motor</span>
+            <span class="module-desc">Makes focus an axis like any other — repeatable focus pulls, recorded in the move file.</span>
+            <span class="module-cost">$35–50</span>
+          </a>
+          <a class="module-row" href="system.html#key-light">
+            <span class="module-name">Key Light</span>
+            <span class="module-desc">High-CRI COB light, flicker-free at any shutter angle, cues synced to the move.</span>
+            <span class="module-cost">$55–75</span>
+          </a>
+          <a class="module-row" href="system.html#fx-light">
+            <span class="module-name">FX Light</span>
+            <span class="module-desc">Addressable pixels for repeatable lightning, fire, TV flicker and police strobes.</span>
+            <span class="module-cost">$30–45</span>
+          </a>
+          <a class="module-row" href="system.html#sync-box">
+            <span class="module-name">Sync Box</span>
+            <span class="module-desc">Camera triggers, sync flash, tally and timecode — the rig's timekeeper.</span>
+            <span class="module-cost">$25–35</span>
+          </a>
+        </div>
+        <div class="hero-actions reveal" style="margin-top:2.5rem">
+          <a class="btn btn--accent" href="system.html">Full specs &amp; build costs</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EVERY TAKE IS DATA ================= -->
+    <section class="section">
+      <div class="container split">
+        <div>
+          <span class="tape">Every take is data</span>
+          <h2>Shoot it, then open it in Blender</h2>
+          <p style="margin-top:1.25rem">
+            Every take produces a <strong>move file</strong>: the camera's position, rotation,
+            lens settings and lighting state for every frame. Import it into Blender or Unreal
+            and your virtual camera matches the real one — no motion tracking, no guesswork.
+          </p>
+          <p style="margin-top:1rem">
+            It works both ways: design a move in Blender, and the hardware performs it on set.
+            Previz becomes the shot.
+          </p>
+          <p style="margin-top:1.75rem"><a href="how-it-works.html#vfx-pipeline">How the VFX pipeline works &#8594;</a></p>
+        </div>
+        <div>
+          <div class="flow" role="img" aria-label="Pipeline: shoot a take, get a move file, export to Blender, Unreal or CSV">
+            <span class="node node--hot">SHOOT</span>
+            <span class="arrow">&#8594;</span>
+            <span class="node">.omfx move file</span>
+            <span class="arrow">&#8594;</span>
+            <span class="node">Blender</span>
+            <span class="node">Unreal</span>
+            <span class="node">FBX / USD / CSV</span>
+          </div>
+          <div class="term" style="margin-top:1.5rem">
+            <pre><span class="p">$</span> unzip -l shot_042_take_03.omfx
+
+  manifest.json      what happened
+  planned/           the move you designed
+  performed/         what encoders measured
+  camera.json        lens &amp; exposure metadata
+  lights/            every cue, every dimmer</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRINCIPLES ================= -->
+    <section class="section section--well">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="tape">Design principles</span>
+          <h2>Six rules the whole project obeys</h2>
+        </div>
+        <div class="principles reveal">
+          <div class="principle">
+            <h3>Repeatability over speed</h3>
+            <p>A phone weighs less than 300&nbsp;g. We spend the torque surplus on precision, not whip-pans.</p>
+          </div>
+          <div class="principle">
+            <h3>The network is untrusted</h3>
+            <p>All timing-critical execution is local to each module. Wi-Fi carries plans, never motion.</p>
+          </div>
+          <div class="principle">
+            <h3>Boring parts, clever geometry</h3>
+            <p>NEMA17 motors, GT2 belts, standard rails — the 3D-printer supply chain. The novelty lives in printed parts and firmware.</p>
+          </div>
+          <div class="principle">
+            <h3>Every take is data</h3>
+            <p>If it happened on set, it lands in the move file — camera, lens, lights, all of it.</p>
+          </div>
+          <div class="principle">
+            <h3>No module is mandatory</h3>
+            <p>A lone pan/tilt head is a complete product. Everything else is additive.</p>
+          </div>
+          <div class="principle">
+            <h3>Documentation is a deliverable</h3>
+            <p>Bad docs are a top complaint against commercial gear. Ours are part of the spec.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATUS ================= -->
+    <section class="section">
+      <div class="container split">
+        <div>
+          <span class="tape">Honest status</span>
+          <h2>Designed in the open, built in the open</h2>
+          <p style="margin-top:1.25rem">
+            OpenMotionFX is currently in the <strong>planning and bench-prototyping phase</strong>.
+            The full system architecture, hardware specs, software design and VFX pipeline are
+            written and public — the first physical prototypes come next. No hardware is for
+            sale, and nothing on this site claims otherwise.
+          </p>
+          <p style="margin-top:1rem">
+            The plan is phased so that every phase ends with something a filmmaker can actually
+            shoot with, starting with the pan/tilt head.
+          </p>
+          <div class="hero-actions" style="margin-top:2rem">
+            <a class="btn btn--accent" href="roadmap.html">See the roadmap</a>
+            <a class="btn" href="contribute.html">Get involved</a>
+          </div>
+        </div>
+        <div>
+          <div class="term" role="img" aria-label="Current phase summary">
+            <pre><span class="p">roadmap --current</span>
+
+  PHASE 0   bench prototype      &#9679; now
+  PHASE 1   pan/tilt + app       next
+  PHASE 2   slider + turntable
+  PHASE 3   lights + sync box
+  PHASE 4   dolly + focus
+  PHASE 5   public launch</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path class="brand-mark" d="M10 22 V10 H22 M42 10 H54 V22 M54 42 V54 H42 M22 54 H10 V42" fill="none" stroke-width="7" stroke-linecap="square"/>
+              <circle cx="32" cy="32" r="8" fill="currentColor"/>
+            </svg>
+            OpenMotionFX
+          </a>
+          <p>Open-source, cinema-grade, modular motion control for smartphone filmmaking and VFX. Local-first, protocol-first, VFX-first.</p>
+        </div>
+        <div>
+          <h4>Site</h4>
+          <ul>
+            <li><a href="system.html">The System</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Code</h4>
+          <ul>
+            <li><a href="https://github.com/OpenMotionFX/OpenMotionFX" target="_blank" rel="noopener">OpenMotionFX</a></li>
+            <li><a href="https://github.com/OpenMotionFX/OpenCamera" target="_blank" rel="noopener">OpenCamera</a></li>
+            <li><a href="https://github.com/OpenMotionFX" target="_blank" rel="noopener">GitHub Organization</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Promise</h4>
+          <ul>
+            <li>No cloud</li>
+            <li>No accounts</li>
+            <li>No subscriptions</li>
+            <li>Ever</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <span>&copy; 2026 OpenMotionFX contributors</span>
+        <span>License intent: GPLv3 (code) &middot; CERN-OHL-S (hardware) &middot; CC-BY-SA (docs) &middot; CC0 (protocol)</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
